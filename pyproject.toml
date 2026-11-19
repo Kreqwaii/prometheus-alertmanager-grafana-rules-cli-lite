@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "prometheus-alertmanager-grafana-rules-cli-lite"
+version = "0.1.0"
+description = "Pure-stdlib offline linter for Prometheus alert rules and Alertmanager configs."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+prometheus-alertmanager-grafana-rules-cli-lite = "prom_alert_lint.cli:main"

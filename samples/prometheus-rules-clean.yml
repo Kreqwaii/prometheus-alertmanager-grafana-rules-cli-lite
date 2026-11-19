@@ -1,0 +1,21 @@
+groups:
+  - name: api_alerts_clean
+    rules:
+      - alert: HighErrorRateClean
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+          team: backend
+        annotations:
+          summary: "Elevated 5xx error rate on API"
+          runbook_url: "https://runbooks.internal/api-5xx"
+
+      - alert: TargetAbsentClean
+        expr: absent(up{job="api"} == 1)
+        for: 3m
+        labels:
+          severity: critical
+        annotations:
+          summary: "API target metrics missing"
+          runbook_url: "https://runbooks.internal/target-absent"

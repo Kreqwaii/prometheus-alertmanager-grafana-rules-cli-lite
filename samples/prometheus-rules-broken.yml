@@ -1,0 +1,27 @@
+groups:
+  - name: api_alerts
+    rules:
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[30s]) > 0.05
+        labels:
+          team: backend
+        annotations:
+          description: "5xx rate is elevated"
+
+      - alert: InstanceDown
+        expr: up == 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Instance is down"
+          runbook_url: "https://runbooks.internal/instance-down"
+
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.1
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Duplicate alert name example"
+          runbook_url: "https://runbooks.internal/high-error-rate"

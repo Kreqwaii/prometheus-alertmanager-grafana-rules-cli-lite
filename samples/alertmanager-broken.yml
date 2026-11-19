@@ -1,0 +1,16 @@
+route:
+  receiver: default-slack
+  routes:
+    - match:
+        severity: critical
+      receiver: pagerduty-oncall
+
+receivers:
+  - name: default-slack
+    slack_configs:
+      - api_url: "https://example.com/alerts/slack-mock-endpoint"
+        channel: "#alerts"
+
+  - name: orphan-webhook
+    webhook_configs:
+      - url: "https://webhooks.internal/secret-token-123"
